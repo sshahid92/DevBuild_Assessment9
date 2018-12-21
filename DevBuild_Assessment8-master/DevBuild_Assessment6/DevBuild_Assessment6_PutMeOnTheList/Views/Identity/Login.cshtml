@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+@Html.ValidationSummary()
+<form action="~/Identity/Login" method="post">
+    <div class="form-group">
+        UserName<input type="text" name="UserName" class="form-control" /><br />
+    </div>
+    <div class="form-group">
+        Password<input type="password" name="Password" class="form-control" /><br />
+    </div>
+        
+    <input type="submit" class="btn btn-default" value="Login" />
+</form>

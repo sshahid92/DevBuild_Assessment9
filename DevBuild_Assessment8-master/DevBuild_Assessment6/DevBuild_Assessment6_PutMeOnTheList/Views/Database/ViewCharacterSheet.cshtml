@@ -1,0 +1,15 @@
+﻿@model DevBuild_Assessment6_PutMeOnTheList.Models.CharacterSheet
+@{
+    ViewBag.Title = "Character Sheet";
+}
+
+<h2>Character Sheet</h2>
+@foreach (var character in ViewBag.Character)
+{
+    <p>Name: @Model.name</p>
+    <p>Alias:</p>
+    @foreach (var alias in @Model.aliases)
+    {
+        <li>@alias</li>
+    }
+}
