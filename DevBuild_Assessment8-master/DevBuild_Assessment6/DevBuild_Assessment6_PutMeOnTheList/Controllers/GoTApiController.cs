@@ -22,7 +22,7 @@ namespace DevBuild_Assessment6_PutMeOnTheList.Controllers
 
         public CharacterSheet GetCharacter(string characterName)
         {
-            CharacterSheet character = new CharacterSheet();
+            List<CharacterSheet> character = new List<CharacterSheet>();
             HttpWebRequest request = WebRequest.CreateHttp($"https://www.anapioficeandfire.com/api/characters?Name={characterName}");
             request.UserAgent = userAgent;
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -32,10 +32,29 @@ namespace DevBuild_Assessment6_PutMeOnTheList.Controllers
                 using (var data = new StreamReader(response.GetResponseStream()))
                 using (var jsonReader = new JsonTextReader(data))
                 {
-                    character = serializer.Deserialize<CharacterSheet>(jsonReader);
+                    character = serializer.Deserialize<List<CharacterSheet>>(jsonReader);
                 }
             }
-            return character;
+            return character[0];
         }
+
+        //this will be implemented in the future. as of now it does nothing
+        //public List<Books> GetBooks(string bookUrl)
+        //{
+        //    List<Books> books = new List<Books>();
+        //    HttpWebRequest request = WebRequest.CreateHttp(bookUrl);
+        //    request.UserAgent = userAgent;
+        //    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        //    if (response.StatusCode == HttpStatusCode.OK)
+        //    {
+        //        var serializer = new JsonSerializer();
+        //        using (var data = new StreamReader(response.GetResponseStream()))
+        //        using (var jsonReader = new JsonTextReader(data))
+        //        {
+        //            books = serializer.Deserialize<List<Books>>(jsonReader);
+        //        }
+        //    }
+        //    return books;
+        //}
     }
 }

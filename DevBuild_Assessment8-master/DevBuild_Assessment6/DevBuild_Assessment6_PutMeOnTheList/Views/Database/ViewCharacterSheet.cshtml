@@ -1,15 +1,39 @@
 ﻿@model DevBuild_Assessment6_PutMeOnTheList.Models.CharacterSheet
+
 @{
     ViewBag.Title = "Character Sheet";
 }
 
 <h2>Character Sheet</h2>
-@foreach (var character in ViewBag.Character)
+<br />
+<p>Name: @Model.name</p><br />
+<p>Gender: @Model.gender</p><br />
+<p>Birth Place: @Model.born</p><br />
+@if (Model.culture != "")
 {
-    <p>Name: @Model.name</p>
-    <p>Alias:</p>
-    @foreach (var alias in @Model.aliases)
-    {
-        <li>@alias</li>
-    }
+    <p>Culture: @Model.culture</p><br />
 }
+
+@if (Model.died != "")
+{
+    <p>Died: @Model.died</p><br />
+}
+
+<p>Titles:</p>
+@foreach (var title in @Model.titles)
+{
+    <li>@title</li>
+}<br />
+<p>Aliases:</p>
+@foreach (var alias in @Model.aliases)
+{
+    <li>@alias</li>
+}<br />
+<p>Played By:</p>
+@foreach (var actor in @Model.playedBy)
+{
+    <li>@actor</li>
+}<br />
+
+
+

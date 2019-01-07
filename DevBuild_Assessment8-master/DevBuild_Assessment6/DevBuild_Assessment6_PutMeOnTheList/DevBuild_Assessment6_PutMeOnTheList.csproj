@@ -178,6 +178,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BookModel.cs" />
     <Compile Include="Models\CharacterSheet.cs" />
     <Compile Include="Models\Dish.cs">
       <DependentUpon>PartyModel.tt</DependentUpon>

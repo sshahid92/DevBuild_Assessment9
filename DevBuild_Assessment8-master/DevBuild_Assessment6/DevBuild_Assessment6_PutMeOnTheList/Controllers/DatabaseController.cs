@@ -44,6 +44,9 @@ namespace DevBuild_Assessment6_PutMeOnTheList.Controllers
         [Authorize]
         public ActionResult EditGuest(int GuestID)
         {
+            GoTApiController goTApiController = new GoTApiController();
+            ViewBag.GoTCharacterList = goTApiController.Get();
+            
             ShahPartyDBEntities Orm = new ShahPartyDBEntities();
             Guest found = Orm.Guests.Find(GuestID);
 
@@ -93,6 +96,8 @@ namespace DevBuild_Assessment6_PutMeOnTheList.Controllers
             oldGuest.AttendanceDate = updateGuest.AttendanceDate;
             oldGuest.EmailAddress = updateGuest.EmailAddress;
             oldGuest.Guest1 = updateGuest.Guest1;
+            oldGuest.CharacterName = updateGuest.CharacterName;
+            oldGuest.CharacterId = updateGuest.CharacterId;
 
             Orm.Entry(oldGuest).State = EntityState.Modified;
             Orm.SaveChanges();
@@ -122,8 +127,17 @@ namespace DevBuild_Assessment6_PutMeOnTheList.Controllers
         public ActionResult DeleteGuest(int GuestID)
         {
             ShahPartyDBEntities Orm = new ShahPartyDBEntities();
+            
+            var broughtDish = Orm.Dishes.Where(d => d.GuestID == GuestID);
+           
+            if(broughtDish != null)
+            {
+                foreach (var dish in broughtDish)
+                {
+                    Orm.Dishes.Remove(dish);
+                }                
+            }
             Guest found = Orm.Guests.Find(GuestID);
-
             Orm.Guests.Remove(found);
             Orm.SaveChanges();
 
@@ -144,8 +158,9 @@ namespace DevBuild_Assessment6_PutMeOnTheList.Controllers
         public ActionResult ViewCharacterSheet(string name)
         {
             GoTApiController goTApiController = new GoTApiController();
-            ViewBag.Character = goTApiController.GetCharacter(name);
-            return View();
+            var character = goTApiController.GetCharacter(name);
+
+            return View(character);
 
         }
     }

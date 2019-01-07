@@ -5,6 +5,12 @@ using System.Web;
 
 namespace DevBuild_Assessment6_PutMeOnTheList.Models
 {
+
+    public class RootObject
+    {
+        public CharacterSheet[] CharacterSheet { get; set; }
+    }
+
     public class CharacterSheet
     {
         public string url { get; set; }
@@ -24,5 +30,5 @@ namespace DevBuild_Assessment6_PutMeOnTheList.Models
         public string[] tvSeries { get; set; }
         public string[] playedBy { get; set; }
     }
-    
+
 }
